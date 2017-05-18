@@ -387,7 +387,7 @@ def plot_validation(opt, parameters):
         print(model_name)
         if model_name == 'release':
             color = 'red'
-            print(color, peak_time)
+            print((color, peak_time))
         elif model_name == 'model0':
             color = 'darkblue'
         else:

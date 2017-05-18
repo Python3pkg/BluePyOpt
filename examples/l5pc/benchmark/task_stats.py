@@ -47,7 +47,7 @@ def get_engine_data():
 def plot_usage(tasks, engine_number_map):
     fig, ax = plt.subplots(1, 1, facecolor='white')
 
-    for engine_uuid, task_list in tasks.items():
+    for engine_uuid, task_list in list(tasks.items()):
         engine_number = engine_number_map[engine_uuid]
         number_list = [engine_number for _ in task_list]
         start_list = [task['started'] for task in task_list]
@@ -80,7 +80,7 @@ def plot_duration_histogram(tasks):
 
 def filter_start_time(start_time, tasks):
     ret = collections.defaultdict(list)
-    for engine_uuid, task_list in tasks.items():
+    for engine_uuid, task_list in list(tasks.items()):
         for task in task_list:
             if task['started'] > start_time:
                 ret[engine_uuid].append(task)
@@ -102,12 +102,12 @@ def calculate_unused_compute(tasks):
 def main():
     tasks, engine_number_map = get_engine_data()
     plot_usage(tasks, engine_number_map)
-    print('Unused compute total:', calculate_unused_compute(tasks))
+    print(('Unused compute total:', calculate_unused_compute(tasks)))
 
     plot_duration_histogram(tasks)
     filtered_tasks = filter_start_time(datetime(2016, 4, 13, 13), tasks)
     plot_usage(filtered_tasks, engine_number_map)
-    print('Unused compute last 30 minutes:', calculate_unused_compute(filtered_tasks))
+    print(('Unused compute last 30 minutes:', calculate_unused_compute(filtered_tasks)))
 
 
 if __name__ == '__main__':

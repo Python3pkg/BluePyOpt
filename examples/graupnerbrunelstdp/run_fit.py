@@ -189,14 +189,14 @@ def analyse():
     best_ind_dict = evaluator.get_param_dict(best_ind)
 
     print('Best Individual')
-    for attribute, value in best_ind_dict.items():
-        print('\t{} : {}'.format(attribute, value))
+    for attribute, value in list(best_ind_dict.items()):
+        print(('\t{} : {}'.format(attribute, value)))
 
     good_solutions = [
         evaluator.get_param_dict
         (ind)
-        for ind in hst.genealogy_history.values
-        () if np.all(np.array(ind.fitness.values) < 1)]
+        for ind in list(hst.genealogy_history.values
+        ()) if np.all(np.array(ind.fitness.values) < 1)]
 
     # model_sg = evaluator.compute_synaptic_gain_with_lists(best_ind)
 
